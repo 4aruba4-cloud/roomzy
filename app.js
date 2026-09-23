@@ -1,13 +1,13 @@
 /* ==================== Roomzy Demo Data ==================== */
 const PROPERTIES = [
-  {id:1, name:"Colonial Heritage Flat", hood:"Pansodan", price:550000, beds:2, baths:1, size:750, furnished:"Furnished", utilities:"Water Included", verified:true, img:"assets/apartment.svg", type:"Apartment"},
-  {id:2, name:"Downtown Business Studio", hood:"Pansodan", price:400000, beds:1, baths:1, size:420, furnished:"Furnished", utilities:"Wi-Fi Included", verified:true, img:"assets/studio.svg", type:"Studio"},
-  {id:3, name:"Heritage Building Shared Room", hood:"Pansodan", price:300000, beds:1, baths:1, size:280, furnished:"Unfurnished", utilities:"Electricity Extra", verified:false, img:"assets/shared.svg", type:"Shared Room"},
-  {id:4, name:"Pansodan Riverside Condo", hood:"Pansodan", price:700000, beds:2, baths:2, size:900, furnished:"Furnished", utilities:"Wi-Fi Included", verified:true, img:"assets/condo.svg", type:"Condo"},
+  {id:1, name:"Colonial Heritage", hood:"Pansodan", price:600000, beds:2, baths:1, size:750, furnished:"Furnished", utilities:"Water, WiFi, electricity Included", verified:true, img:"apartment_pic1.jpg", type:"Apartment"},
+  {id:2, name:"Downtown Business Studio", hood:"Pansodan", price:400000, beds:1, baths:1, size:420, furnished:"Furnished", utilities:"Wi-Fi Included", verified:true, img:"studio.svg", type:"Studio"},
+  {id:3, name:"Heritage Building Shared Room", hood:"Pansodan", price:300000, beds:1, baths:1, size:280, furnished:"Unfurnished", utilities:"Electricity Extra", verified:false, img:"shared.svg", type:"Shared Room"},
+  {id:4, name:"Pansodan Riverside Condo", hood:"Pansodan", price:700000, beds:2, baths:2, size:900, furnished:"Furnished", utilities:"Wi-Fi Included", verified:true, img:"condo.svg", type:"Condo"},
   {id:5, name:"Affordable 1BR Near Market", hood:"Hlaing", price:450000, beds:1, baths:1, size:500, furnished:"Furnished", utilities:"Wi-Fi Included", verified:true, img:"assets/apartment.svg", type:"Apartment"},
   {id:6, name:"Hlaing Budget Shared Apartment", hood:"Hlaing", price:320000, beds:1, baths:1, size:350, furnished:"Unfurnished", utilities:"Electricity Extra", verified:false, img:"assets/shared.svg", type:"Shared Room"},
   {id:7, name:"Hlaing Family Apartment", hood:"Hlaing", price:600000, beds:3, baths:2, size:1150, furnished:"Unfurnished", utilities:"Wi-Fi Extra", verified:true, img:"assets/apartment.svg", type:"Apartment"},
-  {id:8, name:"Modern Hlaing Studio", hood:"Hlaing", price:380000, beds:1, baths:1, size:400, furnished:"Furnished", utilities:"Water Included", verified:true, img:"assets/studio.svg", type:"Studio"},
+  {id:8, name:"Modern Hlaing Studio", hood:"Hlaing", price:480000, beds:1, baths:1, size:400, furnished:"Furnished", utilities:"Water Included", verified:true, img:"assets/studio.svg", type:"Studio"},
   {id:9, name:"Tamwe Residential Apartment", hood:"Tamwe", price:420000, beds:2, baths:1, size:680, furnished:"Unfurnished", utilities:"Electricity Extra", verified:true, img:"assets/apartment.svg", type:"Apartment"},
   {id:10, name:"Cozy Tamwe Shared Room", hood:"Tamwe", price:280000, beds:1, baths:1, size:260, furnished:"Unfurnished", utilities:"Water Included", verified:false, img:"assets/shared.svg", type:"Shared Room"},
   {id:11, name:"Tamwe Balcony Condo", hood:"Tamwe", price:650000, beds:2, baths:2, size:880, furnished:"Furnished", utilities:"Wi-Fi Included", verified:true, img:"assets/condo.svg", type:"Condo"},
