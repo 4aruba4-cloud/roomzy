@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roomzy — A Simpler Way to Find Home</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><img src="real-logo.png" alt="Roomzy"></a>
+    <div class="nav-links">
+      <a href="find-a-home.html">Find a Home</a>
+      <a href="index.html#roommate">Find a Roommate</a>
+      <a href="index.html#how">How It Works</a>
+      <a href="index.html#trust">Trust & Safety</a>
+    </div>
+    <div class="nav-actions" id="navActions"></div>
+    <button class="hamburger">☰</button>
+  </div>
+</nav>
+
+
+<div class="premium-banner">
+  <div class="premium-inner">
+    <div class="premium-text">
+      <h3>Want Your Property Seen First?</h3>
+      <p>Promote your property with Roomzy Premium Listing — get higher visibility, featured placement, and priority in search results.</p>
+    </div>
+    <div class="premium-actions">
+      <button class="btn btn-white" onclick="toast('Premium Listing signup — coming soon!')">List Your Property</button>
+      <button class="btn btn-outline-white" onclick="toast('Learn more about Roomzy Premium — coming soon!')">Learn More</button>
+    </div>
+  </div>
+</div>
+
+<div class="ad-top-strip">
+  <div class="container ad-top-grid">
+    <div class="placeholder-ad ad-blue">
+      <span class="ad-label">ADVERTISEMENT</span>
+      <div><strong>Move Into Your New Home</strong><small>Furniture, cleaning & moving partners — coming soon.</small></div>
+      <button class="ad-action" onclick="toast('Placeholder partner ad')">Learn More</button>
+    </div>
+    <div class="placeholder-ad ad-mint">
+      <span class="ad-label">SPONSORED</span>
+      <div><strong>Roomzy Premium Listing</strong><small>Put your property at the top of the search results.</small></div>
+      <button class="ad-action" onclick="toast('Premium Listing — coming soon!')">Promote</button>
+    </div>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="container">
+    <h1>Find Your Place. Find Your People.</h1>
+    <p>Discover affordable homes and connect with people who match your lifestyle — all in one convenient platform.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="find-a-home.html">Find a Home</a>
+      <a class="btn btn-outline" href="index.html#roommate">Find a Roommate</a>
+    </div>
+    <div class="search-bar">
+      <select id="heroHood">
+        <option value="">Any Township</option>
+        <option>Sanchaung</option><option>Kamayut</option><option>Bahan</option>
+        <option>Yankin</option><option>Hlaing</option><option>Downtown Yangon</option>
+      </select>
+      <select id="heroBudget">
+        <option value="">Any Budget</option>
+        <option value="300000-400000">300K - 400K MMK</option>
+        <option value="400000-600000">400K - 600K MMK</option>
+        <option value="600000-1000000">600K - 1M MMK</option>
+      </select>
+      <button onclick="window.location.href='find-a-home.html'">Search</button>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <h2>Featured Affordable Properties</h2>
+        <p>Hand-picked homes starting from 300,000 MMK/month</p>
+      </div>
+      <a class="link-all" href="find-a-home.html">View all properties →</a>
+    </div>
+    <div class="grid" id="featuredGrid"></div>
+  </div>
+</section>
+
+<section class="section" id="neighborhoods" style="background:#eef1f9;">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <h2>Explore Yangon Neighborhoods</h2>
+        <p>Find homes in the townships that fit your lifestyle</p>
+      </div>
+    </div>
+    <div class="hood-grid" id="hoodGrid"></div>
+  </div>
+</section>
+
+<section class="section" id="roommate">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <h2>Find a Roommate</h2>
+        <p>Matched by lifestyle, budget, and habits — not swiping</p>
+      </div>
+    </div>
+    <div class="roommate-grid" id="roommateGrid"></div>
+  </div>
+</section>
+
+<section class="section" id="how" style="background:#eef1f9;">
+  <div class="container">
+    <div class="section-head"><div><h2>How Roomzy Works</h2></div></div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><h4>Create Your Account</h4><p>Sign up, verify your identity, and build your profile in minutes.</p></div>
+      <div class="step"><div class="step-num">2</div><h4>Search or Match</h4><p>Browse affordable homes on the map or find compatible roommates.</p></div>
+      <div class="step"><div class="step-num">3</div><h4>Connect Directly</h4><p>Message landlords or chat with mutual roommate matches — no middlemen.</p></div>
+      <div class="step"><div class="step-num">4</div><h4>Move In</h4><p>Request a viewing, confirm details, and find your place in Yangon.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="trust">
+  <div class="container">
+    <div class="trust">
+      <h2>Trust & Safety</h2>
+      <p>Every Roomzy account goes through identity verification so you always know who you're dealing with.</p>
+      <div class="trust-grid">
+        <div class="trust-item"><div class="icon">🛡️</div><h5>ID Verification</h5><p>Government ID checked by our team</p></div>
+        <div class="trust-item"><div class="icon">🔒</div><h5>Private by Default</h5><p>Your legal info is never shown publicly</p></div>
+        <div class="trust-item"><div class="icon">💬</div><h5>In-App Messaging</h5><p>No need to share your phone number early</p></div>
+        <div class="trust-item"><div class="icon">✅</div><h5>Verified Listings</h5><p>Admin-reviewed property information</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="color:#fff;margin-bottom:10px;">
+          <span class="footer-logo-badge"><img src="real-logo.png" alt=""></span>Roomzy
+        </div>
+        <p style="font-size:13.5px;max-width:280px;">A Simpler Way to Find Home. Affordable housing and roommate matching for Yangon.</p>
+      </div>
+      <div>
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="find-a-home.html">Find a Home</a></li>
+          <li><a href="index.html#roommate">Find a Roommate</a></li>
+          <li><a href="index.html#neighborhoods">Neighborhoods</a></li>
+          <li><a href="index.html#how">How It Works</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About Roomzy</a></li>
+          <li><a href="index.html#trust">Trust & Safety</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="verification.html">Verification Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Roomzy — School Project Prototype. All demo data is fictional.</div>
+  </div>
+</footer>
+
+
+
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
+    <h3>Welcome Back</h3>
+    <p class="sub">Log in to your Roomzy account</p>
+    <form onsubmit="handleLogin(event)">
+      <div class="form-group"><label>Email</label><input type="email" name="email" required placeholder="you@example.com"></div>
+      <div class="form-group"><label>Password</label><input type="password" name="password" required placeholder="••••••••"></div>
+      <button class="btn btn-primary" type="submit">Log In</button>
+    </form>
+    <div class="form-toggle">Don't have an account? <span onclick="closeModal('loginModal');openModal('registerModal')">Sign up</span></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="registerModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('registerModal')">✕</button>
+    <h3>Create Your Account</h3>
+    <p class="sub">Join Roomzy — you must be 18 or older. Your roommate matches will be based on the preferences you enter below.</p>
+
+    <form onsubmit="handleRegister(event)">
+      <div class="profile-section-title">Account details</div>
+      <div class="form-row">
+        <div class="form-group"><label>Full Name</label><input type="text" name="fullname" required placeholder="Your full name"></div>
+        <div class="form-group"><label>Profile Name</label><input type="text" name="profilename" required placeholder="How others see you"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Email</label><input type="email" name="email" required placeholder="you@example.com"></div>
+        <div class="form-group"><label>Password</label><input type="password" name="password" required minlength="6" placeholder="At least 6 characters"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Phone Number</label><input type="tel" name="phone" required placeholder="09-xxx-xxxxxx"></div>
+        <div class="form-group"><label>Date of Birth</label><input type="date" name="dob" required></div>
+      </div>
+
+      <div class="profile-section-title">Roommate preferences</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Preferred Location</label>
+          <select name="location" required>
+            <option value="">Select township</option>
+            <option>Sanchaung</option><option>Kamayut</option><option>Bahan</option>
+            <option>Yankin</option><option>Hlaing</option><option>Tamwe</option>
+            <option>Pansodan</option><option>Dagon</option><option>Downtown Yangon</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Budget per month (MMK)</label>
+          <div class="form-row" style="gap:8px;">
+            <input type="number" name="budgetMin" required min="300000" step="10000" placeholder="Min (e.g. 300000)">
+            <input type="number" name="budgetMax" required min="300000" step="10000" placeholder="Max (e.g. 500000)">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Hobbies & Interests <span style="font-weight:400;color:var(--muted);">(choose at least 2)</span></label>
+        <div class="hobby-grid">
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Gaming"> Gaming</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Fitness"> Fitness</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Cooking"> Cooking</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Music"> Music</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Movies"> Movies</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Reading"> Reading</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Travel"> Travel</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Photography"> Photography</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Sports"> Sports</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Art"> Art</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Study"> Study</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Fashion"> Fashion</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Technology"> Technology</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Nightlife"> Nightlife</label>
+        </div>
+        <div class="profile-helper">Your matches are calculated from the information you enter here.</div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group"><label>Sleep Schedule</label>
+          <select name="sleepSchedule" required>
+            <option value="">Select</option><option>Early sleeper</option><option>Flexible</option><option>Night owl</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Cleanliness</label>
+          <select name="cleanliness" required>
+            <option value="">Select</option><option>Relaxed</option><option>Moderate</option><option>Very clean</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group"><label>Noise Preference</label>
+          <select name="noisePreference" required>
+            <option value="">Select</option><option>Quiet</option><option>Moderate</option><option>Social / lively</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Cooking</label>
+          <select name="cooking" required>
+            <option value="">Select</option><option>Rarely</option><option>Sometimes</option><option>Often</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group"><label>Guests</label>
+          <select name="guests" required>
+            <option value="">Select</option><option>Rarely</option><option>Sometimes</option><option>Often</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Smoking</label>
+          <select name="smoking" required>
+            <option value="">Select</option><option>Non-smoker</option><option>Occasional</option><option>Smoker</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group"><label>Pets</label>
+          <select name="pets" required>
+            <option value="">Select</option><option>No pets</option><option>Pet-friendly</option><option>Has pets</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Work / Study Schedule</label>
+          <select name="schedule" required>
+            <option value="">Select</option><option>Student</option><option>9–5 worker</option><option>Shift / flexible</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>About Me</label>
+        <textarea name="bio" rows="3" required maxlength="240" placeholder="Tell potential roommates a little about yourself..."></textarea>
+      </div>
+
+      <button class="btn btn-primary" type="submit" style="width:100%">Create Account & Find My Matches</button>
+    </form>
+
+    <div class="form-toggle">Already have an account? <span onclick="closeModal('registerModal');openModal('loginModal')">Log in</span></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="contactModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('contactModal')">✕</button>
+    <h3>Contact Landlord</h3>
+    <p class="sub">Send a message directly — no roommate matching required</p>
+    <form onsubmit="handleContact(event)">
+      <div class="form-group"><label>Your Message</label><textarea rows="4" required placeholder="Hi, is this apartment still available?"></textarea></div>
+      <button class="btn btn-primary" type="submit">Send Message</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="viewingModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('viewingModal')">✕</button>
+    <h3>Request a Viewing</h3>
+    <form onsubmit="handleViewing(event)">
+      <div class="form-group"><label>Preferred Date</label><input type="date" required></div>
+      <div class="form-group"><label>Preferred Time</label><input type="time" required></div>
+      <div class="form-group"><label>Message</label><textarea rows="3" placeholder="Any notes for the landlord?"></textarea></div>
+      <button class="btn btn-primary" type="submit">Submit Request</button>
+    </form>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

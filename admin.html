@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard - Roomzy</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ===== Admin-only styles (kept separate from style.css so you can move them later) ===== */
+  .admin-wrap{padding:32px 0 60px;}
+  .admin-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:24px;}
+  .admin-head h1{color:var(--navy);font-size:26px;}
+  .admin-head p{color:var(--muted);font-size:13.5px;margin-top:4px;}
+  .admin-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:28px;}
+  .admin-stat{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;text-align:center;}
+  .admin-stat .num{font-size:26px;font-weight:700;color:var(--navy);}
+  .admin-stat .lbl{font-size:12.5px;color:var(--muted);margin-top:2px;}
+  .admin-toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:18px;}
+  .admin-toolbar select,.admin-toolbar input{
+    padding:10px 12px;border:1.5px solid #e3e7f0;border-radius:9px;font-size:13.5px;background:var(--white);color:var(--text);
+  }
+  .admin-toolbar input{flex:1;min-width:180px;}
+  .admin-table-wrap{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);overflow-x:auto;}
+  table.admin-table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:760px;}
+  table.admin-table th{
+    text-align:left;background:var(--bg);color:var(--navy);font-size:12px;text-transform:uppercase;
+    letter-spacing:.03em;padding:12px 14px;border-bottom:1.5px solid #e3e7f0;white-space:nowrap;
+  }
+  table.admin-table td{padding:12px 14px;border-bottom:1px solid #eef1f7;vertical-align:top;}
+  table.admin-table tr:last-child td{border-bottom:none;}
+  table.admin-table tr:hover{background:#f8f9fc;}
+  .pill{display:inline-block;padding:4px 10px;border-radius:20px;font-size:11.5px;font-weight:700;}
+  .pill-Feedback{background:#e7ecfb;color:#2c3a63;}
+  .pill-Bug{background:#fde8e8;color:#c0392b;}
+  .pill-Listing{background:#fef3d6;color:#9a6c00;}
+  .pill-User{background:#f3e1fb;color:#7a2ea8;}
+  .pill-Other{background:#e6f6ec;color:#1e6b3f;}
+  .status-pill{display:inline-block;padding:4px 10px;border-radius:20px;font-size:11.5px;font-weight:700;cursor:pointer;border:none;}
+  .status-Open{background:#fde8e8;color:#c0392b;}
+  .status-Reviewing{background:#fef3d6;color:#9a6c00;}
+  .status-Resolved{background:#e6f6ec;color:#1e6b3f;}
+  .subject-cell{font-weight:600;color:var(--navy);max-width:180px;}
+  .details-cell{max-width:280px;color:var(--muted);}
+  .meta-cell{font-size:12px;color:var(--muted);white-space:nowrap;}
+  .del-btn{background:none;color:#c0392b;font-size:16px;padding:4px 8px;border-radius:6px;}
+  .del-btn:hover{background:#fde8e8;}
+  .empty-state{padding:50px 20px;text-align:center;color:var(--muted);}
+  .empty-state .icon{font-size:34px;margin-bottom:10px;}
+  .admin-lock{
+    max-width:420px;margin:80px auto;background:var(--white);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:32px;text-align:center;
+  }
+  .admin-lock h2{color:var(--navy);margin-bottom:8px;}
+  .admin-lock p{color:var(--muted);font-size:13.5px;margin-bottom:18px;}
+  .admin-lock input{width:100%;padding:12px;border:1.5px solid #e3e7f0;border-radius:9px;margin-bottom:12px;font-size:14px;}
+  .export-btn{font-size:13px;}
+  @media(max-width:700px){
+    .admin-head{flex-direction:column;align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><img src="real-logo.png" alt="Roomzy"></a>
+    <div class="nav-links">
+      <a href="find-a-home.html">Find a Home</a>
+      <a href="index.html#roommate">Find a Roommate</a>
+      <a href="index.html#how">How It Works</a>
+      <a href="index.html#trust">Trust & Safety</a>
+    </div>
+    <div class="nav-actions" id="navActions"></div>
+  </div>
+</nav>
+
+<div class="container admin-wrap" id="adminGate">
+  <div class="admin-lock" id="lockBox">
+    <h2>Admin Access</h2>
+    <p>Enter the admin passcode to view feedback &amp; reports. (Demo-only check, stored in this prototype for testing purposes.)</p>
+    <input type="password" id="adminPass" placeholder="Passcode">
+    <button class="btn btn-primary" style="width:100%" onclick="checkAdminPass()">Enter Dashboard</button>
+  </div>
+</div>
+
+<div class="container admin-wrap" id="adminContent" style="display:none;">
+  <div class="admin-head">
+    <div>
+      <h1>Admin Dashboard</h1>
+      <p>Review feedback, bug reports, and flagged listings/users submitted through the site.</p>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button class="btn btn-outline export-btn" onclick="exportCSV()">Export CSV</button>
+      <button class="btn btn-outline export-btn" onclick="clearAllFeedback()">Clear All</button>
+    </div>
+  </div>
+
+  <div class="admin-stats" id="adminStats"></div>
+
+  <div class="admin-toolbar">
+    <select id="filterType" onchange="renderAdminTable()">
+      <option value="">All Types</option>
+      <option value="Feedback">General Feedback</option>
+      <option value="Bug">Bug</option>
+      <option value="Listing">Listing</option>
+      <option value="User">User</option>
+      <option value="Other">Other</option>
+    </select>
+    <select id="filterStatus" onchange="renderAdminTable()">
+      <option value="">All Statuses</option>
+      <option value="Open">Open</option>
+      <option value="Reviewing">Reviewing</option>
+      <option value="Resolved">Resolved</option>
+    </select>
+    <input type="text" id="searchBox" placeholder="Search subject or details..." oninput="renderAdminTable()">
+  </div>
+
+  <div class="admin-table-wrap">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Subject</th>
+          <th>Details</th>
+          <th>Reported By</th>
+          <th>Page</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="adminTableBody"></tbody>
+    </table>
+    <div class="empty-state" id="emptyState" style="display:none;">
+      <div class="icon">&#128203;</div>
+      <p>No feedback or reports match your filters yet.</p>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="app.js"></script>
+<script>
+/* ===================== ADMIN DASHBOARD LOGIC =====================
+   Reads/writes the same 'roomzy_feedback' localStorage key used by
+   the Feedback & Report button on the public-facing pages.
+   Passcode check is a demo-only client-side gate — NOT real security.
+   In a real backend build, this whole page becomes a protected admin
+   route guarded by server-side auth + role checks (see README).
+=================================================================== */
+
+const ADMIN_PASSCODE = "roomzy2026"; // change this anytime, it's just a local demo gate
+
+function checkAdminPass(){
+  const val = document.getElementById('adminPass').value;
+  if(val === ADMIN_PASSCODE){
+    sessionStorage.setItem('roomzy_admin_ok','1');
+    document.getElementById('adminGate').style.display='none';
+    document.getElementById('adminContent').style.display='block';
+    renderAdminDashboard();
+  } else {
+    toast('Incorrect passcode');
+  }
+}
+
+function getFeedbackList(){
+  return JSON.parse(localStorage.getItem('roomzy_feedback') || '[]');
+}
+function saveFeedbackList(list){
+  localStorage.setItem('roomzy_feedback', JSON.stringify(list));
+}
+
+function renderAdminStats(){
+  const list = getFeedbackList();
+  const open = list.filter(x=>x.status==='Open').length;
+  const reviewing = list.filter(x=>x.status==='Reviewing').length;
+  const resolved = list.filter(x=>x.status==='Resolved').length;
+  const stats = [
+    {num:list.length, lbl:'Total Reports'},
+    {num:open, lbl:'Open'},
+    {num:reviewing, lbl:'Reviewing'},
+    {num:resolved, lbl:'Resolved'}
+  ];
+  document.getElementById('adminStats').innerHTML = stats.map(s=>
+    `<div class="admin-stat"><div class="num">${s.num}</div><div class="lbl">${s.lbl}</div></div>`
+  ).join('');
+}
+
+function renderAdminTable(){
+  const list = getFeedbackList().sort((a,b)=> b.id - a.id);
+  const typeF = document.getElementById('filterType').value;
+  const statusF = document.getElementById('filterStatus').value;
+  const q = document.getElementById('searchBox').value.toLowerCase();
+
+  const filtered = list.filter(item=>{
+    if(typeF && item.type !== typeF) return false;
+    if(statusF && item.status !== statusF) return false;
+    if(q && !(item.subject.toLowerCase().includes(q) || item.details.toLowerCase().includes(q))) return false;
+    return true;
+  });
+
+  const body = document.getElementById('adminTableBody');
+  const empty = document.getElementById('emptyState');
+
+  if(filtered.length === 0){
+    body.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  body.innerHTML = filtered.map(item=>{
+    const dt = new Date(item.date);
+    const dateStr = dt.toLocaleDateString() + ' ' + dt.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+    return `
+      <tr>
+        <td><span class="pill pill-${item.type}">${item.type}</span></td>
+        <td class="subject-cell">${escapeHtml(item.subject)}</td>
+        <td class="details-cell">${escapeHtml(item.details)}</td>
+        <td class="meta-cell">${item.email ? escapeHtml(item.email) : '<em>anonymous</em>'}</td>
+        <td class="meta-cell">${escapeHtml(item.page || '-')}</td>
+        <td class="meta-cell">${dateStr}</td>
+        <td>
+          <select class="status-pill status-${item.status}" onchange="updateStatus(${item.id}, this.value)">
+            <option value="Open" ${item.status==='Open'?'selected':''}>Open</option>
+            <option value="Reviewing" ${item.status==='Reviewing'?'selected':''}>Reviewing</option>
+            <option value="Resolved" ${item.status==='Resolved'?'selected':''}>Resolved</option>
+          </select>
+        </td>
+        <td><button class="del-btn" onclick="deleteFeedback(${item.id})" title="Delete">&times;</button></td>
+      </tr>`;
+  }).join('');
+}
+
+function updateStatus(id, newStatus){
+  const list = getFeedbackList();
+  const idx = list.findIndex(x=>x.id === id);
+  if(idx > -1){
+    list[idx].status = newStatus;
+    saveFeedbackList(list);
+    toast('Status updated to ' + newStatus);
+    renderAdminStats();
+    renderAdminTable();
+  }
+}
+
+function deleteFeedback(id){
+  if(!confirm('Delete this report? This cannot be undone.')) return;
+  let list = getFeedbackList();
+  list = list.filter(x=>x.id !== id);
+  saveFeedbackList(list);
+  toast('Report deleted');
+  renderAdminStats();
+  renderAdminTable();
+}
+
+function clearAllFeedback(){
+  if(!confirm('Clear ALL feedback and reports? This cannot be undone.')) return;
+  saveFeedbackList([]);
+  toast('All reports cleared');
+  renderAdminStats();
+  renderAdminTable();
+}
+
+function exportCSV(){
+  const list = getFeedbackList();
+  if(list.length === 0){ toast('No data to export'); return; }
+  const headers = ['id','type','subject','details','email','page','date','status'];
+  const rows = list.map(item => headers.map(h => `"${String(item[h]||'').replace(/"/g,'""')}"`).join(','));
+  const csv = headers.join(',') + '\n' + rows.join('\n');
+  const blob = new Blob([csv], {type:'text/csv'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'roomzy_feedback_export.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('CSV exported');
+}
+
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function renderAdminDashboard(){
+  renderAdminStats();
+  renderAdminTable();
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  if(sessionStorage.getItem('roomzy_admin_ok') === '1'){
+    document.getElementById('adminGate').style.display='none';
+    document.getElementById('adminContent').style.display='block';
+    renderAdminDashboard();
+  }
+});
+</script>
+</body>
+</html>

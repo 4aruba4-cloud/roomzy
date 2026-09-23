@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Roomzy</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><img src="real-logo.png" alt="Roomzy"></a>
+    <div class="nav-links">
+      <a href="find-a-home.html">Find a Home</a>
+      <a href="index.html#roommate">Find a Roommate</a>
+      <a href="index.html#how">How It Works</a>
+      <a href="index.html#trust">Trust & Safety</a>
+    </div>
+    <div class="nav-actions" id="navActions"></div>
+    <button class="hamburger">☰</button>
+  </div>
+</nav>
+
+
+<section class="section" style="padding-top:36px;">
+  <div class="container with-ad-rail">
+    <div class="main-column" id="dashboardContent">
+    <h1 id="welcomeName" style="color:var(--navy);font-size:26px;margin-bottom:6px;"></h1>
+    <p style="color:var(--muted);margin-bottom:24px;">Identity Verification: <b id="verifStatus"></b></p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:34px;">
+      <div class="step"><h4 style="font-size:24px;color:var(--navy);" id="savedCount">0</h4><p>Saved Properties</p></div>
+      <div class="step"><h4 style="font-size:24px;color:var(--navy);" id="likedCount">0</h4><p>Roommate Likes Sent</p></div>
+      <div class="step"><h4 style="font-size:24px;color:var(--navy);" id="mutualCount">0</h4><p>Mutual Matches</p></div>
+      <div class="step"><h4 style="font-size:24px;color:var(--navy);">0</h4><p>Viewing Requests</p></div>
+    </div>
+
+    <div id="roommateProfileSummary"></div>
+    <div class="section-head"><h2>Your Roommate Matches</h2></div>
+    <div class="roommate-grid" id="dashboardRoommateGrid" style="margin-bottom:30px;"></div>
+      <div class="section-head"><h2>Your Saved Properties</h2></div>
+      <div class="grid" id="savedGrid" style="margin-bottom:30px;"></div>
+    </div>
+
+    <aside class="ad-rail" aria-label="Advertisements">
+      <div class="placeholder-ad ad-rail-card ad-blue">
+        <span class="ad-label">ADVERTISEMENT</span>
+        <strong>Boost Your Property</strong>
+        <p>Placeholder for Roomzy Premium Listing promotions.</p>
+        <button class="ad-action" onclick="toast('Premium Listing — coming soon!')">Promote</button>
+      </div>
+      <div class="placeholder-ad ad-rail-card ad-mint">
+        <span class="ad-label">SPONSORED</span>
+        <strong>Set Up Your New Home</strong>
+        <p>Placeholder ad for furniture, internet and moving services.</p>
+        <button class="ad-action" onclick="toast('Placeholder partner ad')">Learn More</button>
+      </div>
+    </aside>
+  </div>
+</section>
+
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="color:#fff;margin-bottom:10px;">
+          <span class="footer-logo-badge"><img src="real-logo.png" alt=""></span>Roomzy
+        </div>
+        <p style="font-size:13.5px;max-width:280px;">A Simpler Way to Find Home. Affordable housing and roommate matching for Yangon.</p>
+      </div>
+      <div>
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="find-a-home.html">Find a Home</a></li>
+          <li><a href="index.html#roommate">Find a Roommate</a></li>
+          <li><a href="index.html#neighborhoods">Neighborhoods</a></li>
+          <li><a href="index.html#how">How It Works</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About Roomzy</a></li>
+          <li><a href="index.html#trust">Trust & Safety</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="verification.html">Verification Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Roomzy — School Project Prototype. All demo data is fictional.</div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

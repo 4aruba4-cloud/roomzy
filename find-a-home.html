@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find a Home — Roomzy</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><img src="real-logo.png" alt="Roomzy"></a>
+    <div class="nav-links">
+      <a href="find-a-home.html">Find a Home</a>
+      <a href="index.html#roommate">Find a Roommate</a>
+      <a href="index.html#how">How It Works</a>
+      <a href="index.html#trust">Trust & Safety</a>
+    </div>
+    <div class="nav-actions" id="navActions"></div>
+    <button class="hamburger">☰</button>
+  </div>
+</nav>
+
+
+<section class="section" style="padding-top:36px;">
+  <div class="container with-ad-rail">
+    <div class="main-column">
+      <h1 style="color:var(--navy);font-size:28px;margin-bottom:6px;">Find a Home</h1>
+      <p style="color:var(--muted);margin-bottom:22px;">Filter by township, budget, and property type</p>
+
+      <div class="search-bar" style="max-width:100%;margin-bottom:26px;">
+      <select id="fHood" onchange="renderSearchResults()">
+        <option value="">Any Township</option>
+        <option>Pansodan</option><option>Hlaing</option><option>Tamwe</option><option>Kamayut</option>
+      </select>
+      <select id="fType" onchange="renderSearchResults()">
+        <option value="">Any Type</option>
+        <option>Apartment</option><option>Studio</option><option>Shared Room</option><option>Condo</option>
+      </select>
+      <input type="number" id="fMin" placeholder="Min Budget (MMK)" oninput="renderSearchResults()">
+      <input type="number" id="fMax" placeholder="Max Budget (MMK)" oninput="renderSearchResults()">
+      <button onclick="renderSearchResults()">Apply Filters</button>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+      <p id="resultsCount" style="color:var(--muted);font-size:14px;font-weight:600;"></p>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-outline" style="padding:8px 16px;font-size:13px;">List View</button>
+        <button class="btn btn-ghost" style="padding:8px 16px;font-size:13px;" onclick="toast('Map view — interactive Google Maps integration required (needs live backend)')">Map View</button>
+      </div>
+    </div>
+
+      <div class="grid" id="resultsGrid"></div>
+    </div>
+
+    <aside class="ad-rail" aria-label="Advertisements">
+      <div class="placeholder-ad ad-rail-card ad-blue">
+        <span class="ad-label">ADVERTISEMENT</span>
+        <strong>Premium Listing</strong>
+        <p>Make your property one of the first homes renters see.</p>
+        <button class="ad-action" onclick="toast('Premium Listing — coming soon!')">Promote a Property</button>
+      </div>
+      <div class="placeholder-ad ad-rail-card ad-amber">
+        <span class="ad-label">SPONSORED</span>
+        <strong>Move-In Essentials</strong>
+        <p>Placeholder ad for furniture, moving and cleaning partners.</p>
+        <button class="ad-action" onclick="toast('Placeholder partner ad')">View Offer</button>
+      </div>
+      <div class="placeholder-ad ad-rail-card ad-mint">
+        <span class="ad-label">SPONSORED</span>
+        <strong>Home Internet</strong>
+        <p>Placeholder ad for internet plans for your new home.</p>
+        <button class="ad-action" onclick="toast('Placeholder internet ad')">Learn More</button>
+      </div>
+    </aside>
+  </div>
+</section>
+
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="color:#fff;margin-bottom:10px;">
+          <span class="footer-logo-badge"><img src="real-logo.png" alt="Roomzy"></span>
+        </div>
+        <p style="font-size:13.5px;max-width:280px;">A Simpler Way to Find Home. Affordable housing and roommate matching for Yangon.</p>
+      </div>
+      <div>
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="find-a-home.html">Find a Home</a></li>
+          <li><a href="index.html#roommate">Find a Roommate</a></li>
+          <li><a href="index.html#neighborhoods">Neighborhoods</a></li>
+          <li><a href="index.html#how">How It Works</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About Roomzy</a></li>
+          <li><a href="index.html#trust">Trust & Safety</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="verification.html">Verification Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Roomzy — School Project Prototype. All demo data is fictional.</div>
+  </div>
+</footer>
+
+
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
+    <h3>Welcome Back</h3>
+    <p class="sub">Log in to your Roomzy account</p>
+    <form onsubmit="handleLogin(event)">
+      <div class="form-group"><label>Email</label><input type="email" name="email" required placeholder="you@example.com"></div>
+      <div class="form-group"><label>Password</label><input type="password" name="password" required placeholder="••••••••"></div>
+      <button class="btn btn-primary" type="submit">Log In</button>
+    </form>
+    <div class="form-toggle">Don't have an account? <span onclick="closeModal('loginModal');openModal('registerModal')">Sign up</span></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="registerModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('registerModal')">✕</button>
+    <h3>Create Your Account</h3>
+    <p class="sub">Join Roomzy — you must be 18 or older</p>
+    <form onsubmit="handleRegister(event)">
+      <div class="profile-section-title">Account details</div>
+      <div class="form-row">
+        <div class="form-group"><label>Full Name</label><input type="text" name="fullname" required placeholder="Your full name"></div>
+        <div class="form-group"><label>Profile Name</label><input type="text" name="profilename" required placeholder="How others see you"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Email</label><input type="email" name="email" required placeholder="you@example.com"></div>
+        <div class="form-group"><label>Password</label><input type="password" name="password" required minlength="6" placeholder="At least 6 characters"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Phone Number</label><input type="tel" name="phone" required placeholder="09-xxx-xxxxxx"></div>
+        <div class="form-group"><label>Date of Birth</label><input type="date" name="dob" required></div>
+      </div>
+
+      <div class="profile-section-title">Roommate preferences</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Preferred Location</label>
+          <select name="location" required>
+            <option value="">Select township</option>
+            <option>Sanchaung</option><option>Kamayut</option><option>Bahan</option>
+            <option>Yankin</option><option>Hlaing</option><option>Tamwe</option>
+            <option>Pansodan</option><option>Dagon</option><option>Downtown Yangon</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Budget per month (MMK)</label>
+          <div class="form-row" style="gap:8px;">
+            <input type="number" name="budgetMin" required min="300000" step="10000" placeholder="Min (e.g. 300000)">
+            <input type="number" name="budgetMax" required min="300000" step="10000" placeholder="Max (e.g. 500000)">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Hobbies & Interests <span style="font-weight:400;color:var(--muted);">(choose at least 2)</span></label>
+        <div class="hobby-grid">
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Gaming"> Gaming</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Fitness"> Fitness</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Cooking"> Cooking</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Music"> Music</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Movies"> Movies</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Reading"> Reading</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Travel"> Travel</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Photography"> Photography</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Sports"> Sports</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Art"> Art</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Study"> Study</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Fashion"> Fashion</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Technology"> Technology</label>
+          <label class="hobby-option"><input type="checkbox" name="hobbies" value="Nightlife"> Nightlife</label>
+        </div>
+        <div class="profile-helper">Your matches are calculated from the information you enter here.</div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group"><label>Sleep Schedule</label>
+          <select name="sleepSchedule" required>
+            <option value="">Select</option><option>Early sleeper</option><option>Flexible</option><option>Night owl</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Cleanliness</label>
+          <select name="cleanliness" required>
+            <option value="">Select</option><option>Relaxed</option><option>Moderate</option><option>Very clean</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group"><label>Noise Preference</label>
+          <select name="noisePreference" required>
+            <option value="">Select</option><option>Quiet</option><option>Moderate</option><option>Social / lively</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Cooking</label>
+          <select name="cooking" required>
+            <option value="">Select</option><option>Rarely</option><option>Sometimes</option><option>Often</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group"><label>Guests</label>
+          <select name="guests" required>
+            <option value="">Select</option><option>Rarely</option><option>Sometimes</option><option>Often</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Smoking</label>
+          <select name="smoking" required>
+            <option value="">Select</option><option>Non-smoker</option><option>Occasional</option><option>Smoker</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group"><label>Pets</label>
+          <select name="pets" required>
+            <option value="">Select</option><option>No pets</option><option>Pet-friendly</option><option>Has pets</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Work / Study Schedule</label>
+          <select name="schedule" required>
+            <option value="">Select</option><option>Student</option><option>9–5 worker</option><option>Shift / flexible</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>About Me</label>
+        <textarea name="bio" rows="3" required maxlength="240" placeholder="Tell potential roommates a little about yourself..."></textarea>
+      </div>
+
+      <button class="btn btn-primary" type="submit" style="width:100%">Create Account & Find My Matches</button>
+    </form>
+
+    <div class="form-toggle">Already have an account? <span onclick="closeModal('registerModal');openModal('loginModal')">Log in</span></div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
